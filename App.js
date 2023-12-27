@@ -6,7 +6,8 @@ import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { ThemeContext } from "./App/theme/theme-context";
 import appTheme from "./App/theme";
-import mapping from "./App/theme/mapping.json";
+import { Mymapping } from "./App/theme/mapping.js";
+
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 // nav
 import { AppNavigator } from "./App/navigation";
@@ -21,6 +22,7 @@ import store from "./App/redux/store";
 // components
 import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
 import ErrorBoundary from "./ErrorBoundary";
+import LinearGradient from "react-native-linear-gradient";
 
 // toast config
 const toastConfig = {
@@ -40,7 +42,7 @@ const App = () => {
   const [theme, setTheme] = useState("light");
   const persistor = persistStore(store);
   function toggleTheme(value) {
-    const nextTheme = theme === "light" ? "dark" : "light";
+    const nextTheme = theme === "light" ? "light" : "light";
     setTheme(nextTheme);
   }
 
@@ -49,10 +51,30 @@ const App = () => {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: theme === "light" ? "white" : "#20232a",
+         // backgroundColor: theme === "light" ? "#000317" : "#000317",
         }}
       >
-        <StatusBar />
+         <LinearGradient
+      colors={["#000317", "#000041"]}
+      start={{ x: 0.3, y: 0 }}
+      end={{ x: 1, y: 2 }}
+      style={{
+        borderRadius: 10,
+
+        flex: 1,
+
+       // opacity: 0.5,
+        width: "100%",
+        height: '200%',
+        position:'absolute',
+
+        flexDirection:'row',
+        justifyContent:"space-around",
+        alignItems:'center'
+      }}
+    >
+       </LinearGradient>
+        <StatusBar backgroundColor="white" barStyle="light-content" />
         <IconRegistry icons={EvaIconsPack} />
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
@@ -67,7 +89,7 @@ const App = () => {
                 <ApplicationProvider
                   {...eva}
                   theme={{ ...eva[theme], ...appTheme[theme] }}
-                  customMapping={mapping}
+                  customMapping={Mymapping}
                 >
                   {getRootRenderingTarget()}
                   <Toast config={toastConfig} />
@@ -76,6 +98,7 @@ const App = () => {
             </I18nextProvider>
           </PersistGate>
         </Provider>
+       
       </SafeAreaView>
     </ErrorBoundary>
   );
