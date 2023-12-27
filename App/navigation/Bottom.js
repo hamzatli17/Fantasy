@@ -19,6 +19,7 @@ import { AgendaScreen } from "../Screens/Agenda/index";
 import { JournalScreen } from "../Screens/Journal/index";
 import { SearchScreen } from "../Screens/Search/index";
 import { ThemeContext } from "../theme/theme-context";
+import CustomTabBar from '../Components/CustomTabBar'
 
 const Tab = createBottomTabNavigator();
 
@@ -34,23 +35,27 @@ export function BottomNavigator() {
     },
   });
   return (
+    <View style={{ flex: 1, backgroundColor: "transparent" }}>
     <Tab.Navigator
+      tabBar={props => <CustomTabBar {...props} />}
       screenOptions={{
-        headerStyle: {
-          backgroundColor: themeElements["color-background"],
-        },
         headerShown: false,
         tabBarStyle: {
-          height: 90,
-          paddingHorizontal: 5,
-          paddingTop: 0,
-          backgroundColor: themeElements["color-background"],
+          height: "8%",
+          width: "100%",
+          marginHorizontal: "0%",
+          borderRadius: 10,
+          paddingTop: "5%",
+        //  backgroundColor: "rgba(255,255,255,0)",
+          paddingHorizontal: 20,
+          borderTopWidth: 0,
+
         },
         tabBarLabelStyle: {
           flex: 1,
         },
       }}
-      barStyle={{ backgroundColor: "pink" }}
+      barStyle={{ backgroundColor: "red" }}
     >
       <Tab.Screen
         name="HomeScreen"
@@ -59,7 +64,7 @@ export function BottomNavigator() {
           tabBarLabel: "Acceuil",
           tabBarIcon: ({ color, size, focused }) =>
             focused ? <HomeIconActive width={24} /> : <HomeIcon width={24} />,
-          tabBarActiveTintColor: themeElements["color-primary"],
+          //   tabBarActiveTintColor: themeElements["color-primary"],
         }}
       />
       <Tab.Screen
@@ -105,5 +110,6 @@ export function BottomNavigator() {
         }}
       />
     </Tab.Navigator>
+    </View>
   );
 }

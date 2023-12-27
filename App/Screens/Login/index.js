@@ -1,6 +1,6 @@
 // ui
 import React, { useState } from "react";
-import { StyleSheet, View, Pressable } from "react-native";
+import { StyleSheet, View, Pressable,TouchableOpacity } from "react-native";
 import { Button, Text, Input, Icon } from "@ui-kitten/components";
 // components
 import { ScreenContainer } from "../../Components/ScreenContainer";
@@ -12,14 +12,25 @@ import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 // api
 import { login } from "../../../App/services/auth/index";
+
+import Mdi_password from '../../assets/Mdi_password.svg'
+
+import Retour from '../../assets/Vector.svg'
+import User from '../../assets/User.svg'
+
+import Facebook from '../../assets/Facebook.svg'
+
+import GoogleLogo from '../../assets/GoogleLogo.svg'
+
 // redux
 import { useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setUser } from "../../redux/actions/user";
+import { widthPercentageToDP } from "react-native-responsive-screen";
 
 export const Login = () => {
   //
-  const { replace, navigate } = useNavigation();
+  const { replace, navigate ,goBack} = useNavigation();
   const dispatch = useDispatch();
   const [hidePassword, setHidePassword] = useState(true);
   const [userType, setUserType] = useState(false);
@@ -72,6 +83,9 @@ export const Login = () => {
 
   return (
     <ScreenContainer withBoundaries>
+       <TouchableOpacity onPress={() => goBack()}>
+            <Retour  style={{marginVertical:widthPercentageToDP('10%')}}/>
+            </TouchableOpacity >
       <Formik
         enableReinitialize
         initialValues={{ email: "", password: "" }}
@@ -86,49 +100,115 @@ export const Login = () => {
           isValid,
           dirty,
         }) => (
-          <View>
-            <Text adjustsFontSizeToFit style={styles.titleStyle} category="h1">
-              {t("LoginScreen.title")}
+        
+            <View style={{  marginVertical:widthPercentageToDP('30%') }}>
+            <Text adjustsFontSizeToFit style={{color:'#EBEBEF',marginVertical:widthPercentageToDP('10%'),alignSelf:'center'}} category="h4">
+            Sign in to get started 
             </Text>
             <Input
-              style={styles.emailInputStyle}
+             accessoryLeft={()=>       
+              <User/>}
+              style={{marginVertical:widthPercentageToDP('2%')}}
               status="primary"
-              placeholder={t("LoginScreen.input.email.placeholder")}
+              placeholder={'Email Adress '}
               onBlur={handleBlur("email")}
               value={values.email}
               onChangeText={handleChange("email")}
             />
             <Input
               status="primary"
+              accessoryLeft={()=>       
+              <Mdi_password/>}
               accessoryRight={getShowPasswordIcon()}
               secureTextEntry={hidePassword}
-              placeholder={t("LoginScreen.input.password.placeholder")}
+              placeholder={'Password'}
               onBlur={handleBlur("password")}
               value={values.password}
               onChangeText={handleChange("password")}
             />
+            <View
+                style={{
+                  alignItems: "flex-end",
+                  marginVertical: "5%",
+                }}
+              >
+                <Text
+                  adjustsFontSizeToFit
+                  style={{
+                    alignItems: "flex-end",
+                    color: "#3F3766",
+                    // textDecorationLine: "underline",
+                  }}
+                  onPress={() => navigate("MotDePasseOublie")}
+              
+                >
+                  Forgot password
+                </Text>
+              </View>
             <Button
               appearance="filled"
-              style={styles.loginButton}
+              style={{marginVertical:widthPercentageToDP('2%')}}
+           
               status="primary"
-              size="small"
+             size="small"
               disabled={loading}
               onPress={handleSubmit}
             >
-              {t("LoginScreen.cta.login")}
+              Sign in
             </Button>
             <Text
               adjustsFontSizeToFit
-              style={styles.ctaForgottenPassword}
-              onPress={() => console.log("reset password")}
+              style={{
+                alignSelf: "center",
+                color: "#3F3766",
+                // textDecorationLine: "underline",
+              }}
+            
               category="p1"
             >
-              {t("LoginScreen.cta.forgotPassword")}
+               OR
             </Text>
-            <Text onPress={() => navigate("Home", { screen: "HomeScreen" })}>
-              Go to home
+            <Button
+            accessoryLeft={()=>       
+              <Facebook/>}
+              appearance="filled"
+              style={{marginVertical:widthPercentageToDP('2%')}}
+           
+              status="primary"
+             size="small"
+              disabled={loading}
+         
+            >
+             Login with Facebook
+            </Button>
+            <Button
+            accessoryLeft={()=>       
+              <GoogleLogo/>}
+              appearance="filled"
+              style={{marginVertical:widthPercentageToDP('2%')}}
+           
+              status="primary"
+             size="small"
+              disabled={loading}
+     
+            >
+              Login with Google
+            </Button>
+            <Text
+              adjustsFontSizeToFit
+              style={{
+                alignSelf: "center",
+                color: "#EBEBEF",
+                marginVertical:widthPercentageToDP('2%')
+                // textDecorationLine: "underline",
+              }}
+            onPress={()=>{navigate('Register')}}
+              category="p1"
+            >
+             Create an account
             </Text>
-          </View>
+            </View>
+       
         )}
       </Formik>
     </ScreenContainer>
