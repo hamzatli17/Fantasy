@@ -3,29 +3,32 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 export default function CustomTabBar({ state, descriptors, navigation }) {
-
+  if (state?.routes[state?.index]?.name === "CreateMusique"  ) return <></>;
 
   return (
 
       <View style={{
            flexDirection:'row',
-           justifyContent:"space-around",
+           justifyContent:"space-between",
            alignItems:'center',
-           width: "100%",
+          width: "100%",
            height:60,
            marginHorizontal:'0%',
-           paddingHorizontal:20
+           backgroundColor:'transparent'
+          // paddingHorizontal:20
       }}>
     <LinearGradient
-      colors={["#FFFFFF80", "#FFFFFF20"]}
+      colors={["#000041", "#000317"]}
       start={{ x: 0.3, y: 0 }}
       end={{ x: 1, y: 2 }}
       style={{
-        borderRadius: 10,
+        //borderRadius: 10,
 
-        
+    
+       borderTopRightRadius:10,
+       borderTopLeftRadius:10,
 
-        opacity: 0.5,
+        //opacity: 0.5,
         width: "100%",
         height: '100%',
         position:'absolute',

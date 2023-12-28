@@ -1,7 +1,43 @@
+
+
 // ui
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { Text } from "@ui-kitten/components";
+
+
+// assets
+import HomeIcon from "../assets/home.svg";
+import HomeIconActive from "../assets/homeactive.svg";
+import AgendaIconActive from "../assets/agendaactive.svg";
+import AgendaIcon from "../assets/agenda.svg";
+import AssignmentIcon from "../assets/assignment.svg";
+import AssignmentIconActive from "../assets/assignmentactive.svg";
+import SearchIcon from "../assets/search.svg";
+import SearchIconActive from "../assets/searchactive.svg";
+
+// nav
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// components
+import { HomeScreen } from "../Screens/Home/index";
+import { AgendaScreen } from "../Screens/Agenda/index";
+
+
+import { JournalScreen } from "../Screens/Journal/index";
+import { SearchScreen } from "../Screens/Search/index";
+import { ThemeContext } from "../theme/theme-context";
+
+
+
+import { useNavigation, useRoute } from "@react-navigation/native";
+
+import CustomTabBar from "../Components/CustomTabBar";
+
+import { createStackNavigator } from "@react-navigation/stack";
+
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+/* import { Text } from "@ui-kitten/components";
 // assets
 import HomeIcon from "../assets/home.svg";
 import HomeIconActive from "../assets/homeactive.svg";
@@ -22,42 +58,56 @@ import { ThemeContext } from "../theme/theme-context";
 import CustomTabBar from '../Components/CustomTabBar'
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator(); */
+
+
+
 
 export function BottomNavigator() {
+  const navigation = useNavigation();
+  const route = useRoute();
+
   const { themeElements } = React.useContext(ThemeContext);
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "aliceblue",
-      height: "100%",
-      width: "100%",
-    },
-  });
+  useEffect(() => {
+    navigation.addListener();
+  }, []);
+
+  // const styles = StyleSheet.create({
+  //   container: {
+  //     flex: 1,
+  //     backgroundColor: "aliceblue",
+  //     height: "100%",
+  //     width: "100%",
+  //   },
+  // });
   return (
     <View style={{ flex: 1, backgroundColor: "transparent" }}>
-    <Tab.Navigator
-      tabBar={props => <CustomTabBar {...props} />}
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          height: "8%",
-          width: "100%",
-          marginHorizontal: "0%",
-          borderRadius: 10,
-          paddingTop: "5%",
-        //  backgroundColor: "rgba(255,255,255,0)",
-          paddingHorizontal: 20,
-          borderTopWidth: 0,
 
-        },
-        tabBarLabelStyle: {
-          flex: 1,
-        },
-      }}
-      barStyle={{ backgroundColor: "red" }}
-    >
-      <Tab.Screen
+
+
+      <Tab.Navigator
+        tabBar={props => <CustomTabBar {...props} />}
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            height: "8%",
+           // width: "200%",
+            marginHorizontal: "0%",
+            borderRadius: 10,
+          //  paddingTop: "5%",
+            backgroundColor: "rgba(255,255,255,0)",
+            paddingHorizontal: 20,
+            borderTopWidth: 0,
+        
+          },
+          tabBarLabelStyle: {
+            flex: 1,
+          },
+        }}
+        barStyle={{ backgroundColor: "#B974FF" }}
+      >
+          <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{
@@ -109,7 +159,7 @@ export function BottomNavigator() {
           tabBarActiveTintColor: themeElements["color-primary"],
         }}
       />
-    </Tab.Navigator>
+      </Tab.Navigator>
     </View>
   );
 }

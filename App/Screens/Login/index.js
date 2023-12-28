@@ -48,7 +48,7 @@ export const Login = () => {
 
   const handleOnSubmit = (values, actions) => {
     setLoading(true);
-    login(
+  /*   login(
       values.email,
       values.password,
       !userType ? "particulier" : "prestataire"
@@ -66,7 +66,8 @@ export const Login = () => {
         setLoading(false);
         showToastError(t("LoginScreen.error"), err.data.message);
         console.log("login error", err.data.message);
-      });
+      }); */
+      navigate('HomePage')
   };
 
   function getShowPasswordIcon() {
