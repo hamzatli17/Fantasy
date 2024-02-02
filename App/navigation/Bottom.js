@@ -7,9 +7,17 @@ import { StyleSheet, View } from "react-native";
 
 // assets
 import HomeIcon from "../assets/home.svg";
-import HomeIconActive from "../assets/homeactive.svg";
-import AgendaIconActive from "../assets/agendaactive.svg";
-import AgendaIcon from "../assets/agenda.svg";
+import Ranking from "../assets/Ranking.svg";
+import RankingActive from "../assets/RankingActive.svg";
+import League from "../assets/League.svg";
+import LeagueActive from "../assets/LeagueActive.svg";
+import HomeActive from "../assets/HomeActive.svg";
+import Home from "../assets/Home2.svg";
+import TransferActive from "../assets/TransferActive.svg";
+import Transfer from "../assets/Transfer.svg";
+import ProfileActive from "../assets/ProfileActive.svg";
+import Profile from "../assets/Profile.svg";
+
 import AssignmentIcon from "../assets/assignment.svg";
 import AssignmentIconActive from "../assets/assignmentactive.svg";
 import SearchIcon from "../assets/search.svg";
@@ -20,6 +28,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // components
 import { HomeScreen } from "../Screens/Home/index";
 import { AgendaScreen } from "../Screens/Agenda/index";
+import {Transfert} from '../Screens/Transfer'
+import {LeagueScreen} from '../Screens/League/index.js'
+import {Profil} from '../Screens/Profile/index.js'
+import {Rankings} from '../Screens/Ranking/index.js'
+import {Changement} from '../Screens/Changement/index.js'
 
 
 import { JournalScreen } from "../Screens/Journal/index";
@@ -33,6 +46,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import CustomTabBar from "../Components/CustomTabBar";
 
 import { createStackNavigator } from "@react-navigation/stack";
+import { Text } from "@ui-kitten/components";
+import { widthPercentageToDP } from "react-native-responsive-screen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -82,7 +97,7 @@ export function BottomNavigator() {
   //   },
   // });
   return (
-    <View style={{ flex: 1, backgroundColor: "transparent" }}>
+    <View style={{ flex: 1, backgroundColor: "#F4F2F2" }}>
 
 
 
@@ -90,6 +105,7 @@ export function BottomNavigator() {
         tabBar={props => <CustomTabBar {...props} />}
         screenOptions={{
           headerShown: false,
+        
           tabBarStyle: {
             height: "8%",
            // width: "200%",
@@ -97,9 +113,9 @@ export function BottomNavigator() {
             borderRadius: 10,
           //  paddingTop: "5%",
             backgroundColor: "rgba(255,255,255,0)",
-            paddingHorizontal: 20,
+            paddingHorizontal: 0,
             borderTopWidth: 0,
-        
+      
           },
           tabBarLabelStyle: {
             flex: 1,
@@ -108,54 +124,73 @@ export function BottomNavigator() {
         barStyle={{ backgroundColor: "#B974FF" }}
       >
           <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="Rankings"
+        component={Rankings}
         options={{
-          tabBarLabel: "Acceuil",
+          tabBarLabel:'',
+         /*  (focused )=><Text style={{paddingTop:30,color:focused?
+            '#BAFF2A':'#F4F2F2',fontSize:14}}>Ranking</Text> */ 
           tabBarIcon: ({ color, size, focused }) =>
-            focused ? <HomeIconActive width={24} /> : <HomeIcon width={24} />,
+          <View style={{flexDirection:'column',marginTop:-24,alignItems:'center'}}>
+           {focused ? <RankingActive width={24} /> : <Ranking width={24} />}
+            <Text style={{color:focused?
+            '#BAFF2A':'#F4F2F2',fontSize:14}}>Ranking</Text>
+            </View>,
           //   tabBarActiveTintColor: themeElements["color-primary"],
         }}
       />
       <Tab.Screen
-        name="AgendaScreen"
-        component={AgendaScreen}
+        name="LeagueScreen"
+        component={LeagueScreen}
         options={{
-          tabBarLabel: "Agenda",
+          tabBarLabel:'',
           tabBarIcon: ({ color, size, focused }) =>
-            focused ? (
-              <AgendaIconActive width={24} />
-            ) : (
-              <AgendaIcon width={24} />
-            ),
+          <View style={{flexDirection:'column',marginTop:-24,alignItems:'center'}}>
+          {focused ? <LeagueActive width={24} /> : <League width={24} />}
+           <Text style={{color:focused?
+           '#BAFF2A':'#F4F2F2',fontSize:14}}>League</Text>
+           </View>,
           tabBarActiveTintColor: themeElements["color-primary"],
         }}
       />
       <Tab.Screen
-        name="JournalScreen"
-        component={JournalScreen}
+        name="Transfert"
+        component={Transfert}
         options={{
-          tabBarLabel: "Journal de bord",
+          tabBarLabel:'' ,
           tabBarIcon: ({ color, size, focused }) =>
-            focused ? (
-              <AssignmentIconActive width={24} />
-            ) : (
-              <AssignmentIcon width={24} />
-            ),
+          <View style={{marginTop:focused?-32:-24,alignItems:'center'}}>
+          {focused ? <HomeActive width={60} /> : <Home width={70} />}
+          
+           </View>,
           tabBarActiveTintColor: themeElements["color-primary"],
         }}
       />
       <Tab.Screen
-        name="SearchScreen"
-        component={SearchScreen}
+        name="Changement"
+        component={Changement}
         options={{
-          tabBarLabel: "Recherche",
+          tabBarLabel:'',
           tabBarIcon: ({ color, size, focused }) =>
-            focused ? (
-              <SearchIconActive width={24} />
-            ) : (
-              <SearchIcon width={24} />
-            ),
+          <View style={{flexDirection:'column',marginTop:-24,alignItems:'center'}}>
+          {focused ? <TransferActive width={24} /> : <Transfer width={24} />}
+           <Text style={{color:focused?
+           '#BAFF2A':'#F4F2F2',fontSize:14}}>Transfer</Text>
+           </View>,
+          tabBarActiveTintColor: themeElements["color-primary"],
+        }}
+      />
+      <Tab.Screen
+        name="Profil"
+        component={Profil}
+        options={{
+          tabBarLabel:'',
+          tabBarIcon: ({ color, size, focused }) =>
+          <View style={{flexDirection:'column',marginTop:-22,alignItems:'center'}}>
+          {focused ? <ProfileActive width={26} /> : <Profile width={26} />}
+           <Text style={{color:focused?
+           '#BAFF2A':'#F4F2F2',fontSize:14}}>Profile</Text>
+           </View>,
           tabBarActiveTintColor: themeElements["color-primary"],
         }}
       />

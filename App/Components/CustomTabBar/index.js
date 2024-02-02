@@ -12,10 +12,10 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
            justifyContent:"space-between",
            alignItems:'center',
           width: "100%",
-           height:60,
+           height:80,
            marginHorizontal:'0%',
-           backgroundColor:'transparent'
-          // paddingHorizontal:20
+           backgroundColor:'transparent',
+        
       }}>
     <LinearGradient
       colors={["#000041", "#000317"]}
@@ -25,8 +25,8 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
         //borderRadius: 10,
 
     
-       borderTopRightRadius:10,
-       borderTopLeftRadius:10,
+       borderTopRightRadius:25,
+       borderTopLeftRadius:25,
 
         //opacity: 0.5,
         width: "100%",
@@ -73,6 +73,7 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
         // };
 
         return (
+        
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
@@ -83,7 +84,10 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
             style={ options?.tabBarStyle }
           >
             {options?.tabBarIcon({ focused: isFocused })}
+        
+          
           </TouchableOpacity>
+        
         );
       })}
      </View>

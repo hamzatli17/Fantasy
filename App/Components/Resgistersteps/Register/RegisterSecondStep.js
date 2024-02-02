@@ -1,6 +1,6 @@
 // ui
 import React, { useState } from "react";
-import { StyleSheet, View, Pressable, TouchableOpacity,FlatList } from "react-native";
+import { StyleSheet, View, Pressable, TouchableOpacity, FlatList } from "react-native";
 import { Button, Text, Input, Icon } from "@ui-kitten/components";
 // components
 import { ScreenContainer } from "../../ScreenContainer";
@@ -127,14 +127,14 @@ export const RegisterSecondStep = (props) => {
         },
     });
 
-    const onPress =(item)=>{
+    const onPress = (item) => {
         setSelectedTeam(item)
     }
     const handleOnSubmit = (values, actions) => {
         setLoading(true);
         saveState({
             equipe: selectedTeam,
-          
+
 
         });
         next();
@@ -204,13 +204,13 @@ export const RegisterSecondStep = (props) => {
                                 renderItem={({ item, index }) => {
                                     console.log("items", item);
                                     return (
-                                        <TouchableOpacity onPress={()=> onPress(item)}>
-                                        <View style={{ backgroundColor: selectedTeam?.id===item?.id?'#BEBED1': '#2B234F', paddingVertical: widthPercentageToDP('8%'), borderRadius: 20, flexDirection: 'row', alignItems: 'center', paddingHorizontal: widthPercentageToDP('6%'),marginVertical: widthPercentageToDP('2%') }}>
-                                            <FastImage style={{ width: 50, height: 50 }} source={item?.image} resizeMode="contain" />
-                                            <Text adjustsFontSizeToFit style={{ color:  selectedTeam?.id===item?.id?'#0F0830':'#EBEBEF', marginHorizontal: widthPercentageToDP('10%') }} category="h4">
-                                              {item?.name}
-                                            </Text>
-                                        </View>
+                                        <TouchableOpacity onPress={() => onPress(item)}>
+                                            <View style={{ backgroundColor: selectedTeam?.id === item?.id ? '#BEBED1' : '#2B234F', paddingVertical: widthPercentageToDP('8%'), borderRadius: 20, flexDirection: 'row', alignItems: 'center', paddingHorizontal: widthPercentageToDP('6%'), marginVertical: widthPercentageToDP('2%') }}>
+                                                <FastImage style={{ width: 50, height: 50 }} source={item?.image} resizeMode="contain" />
+                                                <Text adjustsFontSizeToFit style={{ color: selectedTeam?.id === item?.id ? '#0F0830' : '#EBEBEF', marginHorizontal: widthPercentageToDP('10%') }} category="h4">
+                                                    {item?.name}
+                                                </Text>
+                                            </View>
                                         </TouchableOpacity>
                                     );
                                 }}
@@ -225,10 +225,10 @@ export const RegisterSecondStep = (props) => {
                             disabled={selectedTeam === null}
                             status="primary"
                             size="small"
-                           /// disabled={loading}
+                            /// disabled={loading}
                             onPress={handleSubmit}
                         >
-                           Next
+                            Next
                         </Button>
 
                     </View>
